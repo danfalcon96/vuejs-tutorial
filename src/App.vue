@@ -10,7 +10,7 @@
   // Use reactive if using object with bunch of related data
   const product = ref('Socks')
   const image = ref(socksGreenImage)
-  const inStock = ref(true)
+  const inStock = ref(false)
 
   const details = ref(['50% cotton', '50% wool', '20% polyester'])
 
@@ -44,17 +44,27 @@
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
+        <!-- style="{}" = React's style={{}} -->
         <div
           v-for="variant in variants"
           :key="variant.id"
           @mouseover="updateImage(variant.image)"
+          class="color-circle"
+          :style="{ backgroundColor: variant.color }"
         >
-          {{ variant.color }}
         </div>
         <!-- If using if and for together, if is always first. -->
         <!-- To make for to be first, put in diff elements or nesting -->
 
-        <button class="button" v-on:click="addToCart">Add to Cart</button>
+        <!-- Class binding: classname: condition. Can be also array. -->
+        <button
+          class="button"
+          :class="{ disabledButton: !inStock }"
+          v-on:click="addToCart"
+          :disabled="!inStock"
+        >
+          Add to Cart
+        </button>
         <!-- Can use event modifiers -->
         <!-- e.g. @click.once = make sure event triggered only once -->
         <!-- @click.prevent = prevent native behavior. event.preventDefault -->
