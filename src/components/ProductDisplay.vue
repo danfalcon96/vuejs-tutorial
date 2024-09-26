@@ -16,6 +16,9 @@ const props = defineProps({
   }
 })
 
+// Custom Events = defineEmits
+const emit = defineEmits(['add-to-cart'])
+
 // Wrapping ref for Reactivity (useState)
 // Use reactive if using object with bunch of related data
 const product = ref('Socks')
@@ -47,7 +50,9 @@ const variants = ref([
   { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
 ])
 
-const addToCart = () => cart.value += 1
+const addToCart = () => {
+  emit('add-to-cart', variants.value[selectedVariant.value].id)
+}
 
 const title = computed(() => {
   return brand.value + ' ' + product.value
