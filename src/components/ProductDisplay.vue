@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import socksGreenImage from '@/assets/images/socks_green.jpeg'
 import socksBlueImage from '@/assets/images/socks_blue.jpeg'
 
+import ReviewForm from "@/components/ReviewForm.vue"
+
 // Single-File Component === React Hooks
 // Composables === Custom Hooks
 // @ = absolute path syntax
@@ -50,6 +52,8 @@ const variants = ref([
   { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
 ])
 
+const reviews = ref([])
+
 const addToCart = () => {
   emit('add-to-cart', variants.value[selectedVariant.value].id)
 }
@@ -60,6 +64,11 @@ const title = computed(() => {
 
 const updateVariant = (index) => {
   selectedVariant.value = index
+}
+
+const addReview = (review) => {
+  reviews.value.push(review)
+  console.log(review)
 }
 </script>
 
@@ -108,5 +117,6 @@ const updateVariant = (index) => {
         <!-- @keydown.enter = Enter key keydown -->
       </div>
     </div>
+    <ReviewForm @review-submitted="addReview"></ReviewForm>
   </div>
 </template>
