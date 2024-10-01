@@ -4,7 +4,7 @@ import socksGreenImage from '@/assets/images/socks_green.jpeg'
 import socksBlueImage from '@/assets/images/socks_blue.jpeg'
 
 import ReviewForm from "@/components/ReviewForm.vue"
-
+import ReviewList from "@/components/ReviewList.vue"
 // Single-File Component === React Hooks
 // Composables === Custom Hooks
 // @ = absolute path syntax
@@ -117,6 +117,7 @@ const addReview = (review) => {
         <!-- @keydown.enter = Enter key keydown -->
       </div>
     </div>
+    <ReviewList :reviews="reviews"></ReviewList>
     <ReviewForm @review-submitted="addReview"></ReviewForm>
   </div>
 </template>
