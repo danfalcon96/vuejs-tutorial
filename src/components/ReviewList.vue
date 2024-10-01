@@ -9,12 +9,18 @@
 
 <template>
   <div class="review-container">
-    <h3>Reviews:</h3>
+    <h3>
+      <!-- Default slot: <slot></slot> -->
+      <!-- Named slot: <slot name="name"></slot> -->
+      <slot name="heading"></slot>
+    </h3>
     <ul>
       <li v-for="(review, index) in reviews" :key="index">
-        <span>{{ review.name }} gave this {{ review.rating }} stars</span>
-        <br/>
-        <span>{{ review.content }}</span>
+        <!-- Use binding to pass variable to parent -->
+        <slot name="item" :review="review">
+          <!-- Inside slot is default if there is no passed from parent -->
+          <span>{{ review.name }}</span>: <span>{{ review.content }}</span>
+        </slot>
       </li>
     </ul>
   </div>

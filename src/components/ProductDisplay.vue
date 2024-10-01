@@ -117,7 +117,18 @@ const addReview = (review) => {
         <!-- @keydown.enter = Enter key keydown -->
       </div>
     </div>
-    <ReviewList :reviews="reviews"></ReviewList>
+    <ReviewList :reviews="reviews">
+      <!-- Default Slot: just put the child component here -->
+      <!-- Named Slot: use # for name of slot in child component -->
+      <template #heading>
+        Reviews:
+      </template>
+      <template #item="{ review }">
+        <span>{{ review.name }} gave this {{ review.rating }} stars</span>
+        <br/>
+        <span>{{ review.content }}</span>
+      </template>
+    </ReviewList>
     <ReviewForm @review-submitted="addReview"></ReviewForm>
   </div>
 </template>
