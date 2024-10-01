@@ -1,9 +1,16 @@
 <script setup>
-  import {ref} from "vue";
+import {onMounted, ref} from "vue";
   import ProductDisplay from "@/components/ProductDisplay.vue";
 
   const cart = ref([])
   const premium = ref(true)
+
+  // React's componentDidMount
+  onMounted(() => {
+    fetch('http://localhost:3000/cart')
+      .then(res => res.json())
+      .then(data => cart.value = data.content)
+  })
 
   const updateCart = (id) => cart.value.push(id)
 </script>
